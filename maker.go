@@ -23,7 +23,7 @@ func MakeDir(name string) error {
 	return nil
 }
 func MakeFile(name, content string) error {
-	println("Creating file:", name, content)
+
 	absPath, err := filepath.Abs(name)
 	if err != nil {
 		return err

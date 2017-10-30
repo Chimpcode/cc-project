@@ -3,6 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strings"
+	"io/ioutil"
+	"log"
+	"path/filepath"
 )
 
 const (
@@ -17,10 +21,38 @@ func makeProcess(task ChimpcodeTask) error {
 			return err
 		}
 	case CreateFile:
-		err := MakeFile(task.GetName(), task.GetContent())
-		if err != nil {
-			return err
+		if strings.Contains(task.GetContent(), "file:") {
+			log.Println("Into file content", task.GetContent())
+			// The content es in a file and We needs read this file
+			pathToFile := strings.Replace(task.GetContent(), "file:", "", -1)
+
+			dir, err := GetCurrentDir()
+			if err != nil {
+				return err
+			}
+
+			absPath := filepath.Join(*dir, pathToFile)
+
+			data, err := ioutil.ReadFile(absPath)
+
+			if err != nil {
+				return err
+			}
+
+			err = MakeFile(task.GetName(), string(data))
+			if err != nil {
+				return err
+			}
+
+
+		} else {
+			// The content is explicit into content prop
+			err := MakeFile(task.GetName(), task.GetContent())
+			if err != nil {
+				return err
+			}
 		}
+
 	}
 	return nil
 }
@@ -30,14 +62,19 @@ func ProcessTask(task interface{}) error {
 	default:
 		return errors.New(fmt.Sprintf("Unexpected type %T", v))
 	case ChimpcodeTaskNode:
-		makeProcess(ChimpcodeTask(v))
-		err := ProcessTask(v.ChildTask)
+		err := makeProcess(ChimpcodeTask(v))
+		if err != nil {
+			return err
+		}
+		err = ProcessTask(v.ChildTask)
 		if err != nil {
 			return err
 		}
 	case ChimpcodeTaskLeaf:
-		makeProcess(ChimpcodeTask(v))
-
+		err := makeProcess(ChimpcodeTask(v))
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }

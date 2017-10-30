@@ -30,6 +30,11 @@ var PrincipalTasks ChimpcodeTasks = ChimpcodeTasks{
 		Name: "globals",
 		TypeOfProcess: "create_dir",
 	},
+	ChimpcodeTaskLeaf{
+		Name: "main.go",
+		TypeOfProcess: "create_file",
+		Content: "file:base/main.go",
+	},
 
 }
 
