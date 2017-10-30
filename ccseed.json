@@ -1,0 +1,10 @@
+{
+    "project_name": "Chimpcode",
+    "author": "Bregy",
+    "description": "The first utility for chimpcoders",
+    "backend_framework": "iris",
+    "use_graphql": true,
+    "database_type": "boltdb",
+    "storage_framework": "minio",
+    "data_types": []
+}
