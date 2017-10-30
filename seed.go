@@ -2,7 +2,7 @@ package main
 
 type DataType struct {
 	Name string `json:"name"`
-	Persistence string `json:"persistence"`
+	Persistence bool `json:"persistence"`
 	Descriptor string `json:"descriptor"`
 	ChimpcodeHelper bool `json:"chimpcode_helper"`
 }

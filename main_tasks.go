@@ -1,26 +1,35 @@
 package main
 
-type ChimpcodeTaskNode struct {
-	Name string `json:"name"`
-	TypeOfProcess string `json:"type_of_process"`
-	ChildTask interface{} `json:"child_task"`
-}
 
-type ChimpcodeTaskLeaf struct {
-	Name string `json:"name"`
-	TypeOfProcess string `json:"type_of_process"`
+var PrincipalTasks ChimpcodeTasks = ChimpcodeTasks{
+	ChimpcodeTaskLeaf{
+		Name: "api",
+		TypeOfProcess: "create_dir",
+	},
+	ChimpcodeTaskLeaf{
+		Name: "database",
+		TypeOfProcess: "create_dir",
+	},
+	ChimpcodeTaskLeaf{
+		Name: "db",
+		TypeOfProcess: "create_dir",
+	},
+	ChimpcodeTaskLeaf{
+		Name: "storage",
+		TypeOfProcess: "create_dir",
+	},
+	ChimpcodeTaskLeaf{
+		Name:"types",
+		TypeOfProcess: "create_dir",
+	},
+	ChimpcodeTaskLeaf{
+		Name: "utils",
+		TypeOfProcess: "create_dir",
+	},
+	ChimpcodeTaskLeaf{
+		Name: "globals",
+		TypeOfProcess: "create_dir",
+	},
 
-}
-
-type ChimpcodeTasks []interface{}
-
-var MainTasks ChimpcodeTasks = ChimpcodeTasks{
-	ChimpcodeTaskLeaf{"api", "create"},
-	ChimpcodeTaskLeaf{"database", "create"},
-	ChimpcodeTaskLeaf{"db", "create"},
-	ChimpcodeTaskLeaf{"storage", "create"},
-	ChimpcodeTaskLeaf{"types", "create"},
-	ChimpcodeTaskLeaf{"utils", "create"},
-	ChimpcodeTaskLeaf{"globals", "create"},
 }
 

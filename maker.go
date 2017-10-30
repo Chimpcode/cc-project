@@ -22,6 +22,28 @@ func MakeDir(name string) error {
 	}
 	return nil
 }
+func MakeFile(name, content string) error {
+	println("Creating file:", name, content)
+	absPath, err := filepath.Abs(name)
+	if err != nil {
+		return err
+	}
+	var file *os.File
+
+	if _, err := os.Stat(absPath); os.IsNotExist(err) {
+		file, err = os.Create(absPath)
+		if err != nil {
+			return err
+		}
+	}
+
+	_, err = file.Write([]byte(content))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
 
 func ParseSeed(path string) (*ChimpCodeSeed, error) {
 	seed := new(ChimpCodeSeed)
