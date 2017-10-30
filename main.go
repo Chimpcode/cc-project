@@ -3,8 +3,8 @@ package main
 import (
 	"gopkg.in/alecthomas/kingpin.v2"
 	"fmt"
-	"strings"
 	"path/filepath"
+	"strings"
 )
 
 var (
@@ -13,6 +13,7 @@ var (
 )
 
 func main() {
+
 	kingpin.Parse()
 	if strings.EqualFold(*configFile, "") {
 		var err error
@@ -34,4 +35,25 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(cc)
+
+
+
+	/* ALPHA REVIEWS
+	ft := token.NewFileSet()
+	data, err := ioutil.ReadFile("template/u.go")
+	if err != nil {
+		panic(err)
+	}
+
+	f, err := parser.ParseFile(ft, "", data, 0)
+	if err != nil {
+		panic(err)
+	}
+	for k, d := range f.Scope.Objects {
+		fmt.Println("Key:", k)
+		fmt.Println(d)
+	}
+	*/
+
+
 }

@@ -37,7 +37,6 @@ func (t ChimpcodeTaskNode) GetContent() string {
 //}
 
 
-
 func (t ChimpcodeTaskLeaf) GetName() string {
 	return t.Name
 }
